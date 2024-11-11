@@ -1,32 +1,40 @@
 public class Basket {
-    private static String items = "";
+    private String items = "";
 
-    public static void main(String[] args) {
-        add("1 грамм курицы", 300);
-        add("5 штук помидорок", 800);
-        print("Содержание корзины:");
-        clear();
-        print("Содержание корзины: ");
+    private int limit = 20000;
+    private int totalPrice = 0;
+
+    public boolean contains (String name) {
+        return items.contains(name);
     }
 
-    public static void add(String name, int price) {
+    public void add(String name, int price) {
+        if (contains(name)){
+            return;
+        }
+        if (totalPrice + price >= limit) {
+            return;
+        }
         if (items.isEmpty()) {
             items += name + " - " + price;
+            totalPrice += price;
         } else {
             items += "\n" + name + " - " + price;
+            totalPrice += price;
         }
     }
 
-    public static void clear() {
+    public void clear() {
         items = "";
     }
 
-    public static void print(String title) {
+    public void print(String title) {
         System.out.println(title);
         if(items.isEmpty()) {
             System.out.println("Корзина пуста!");
         } else {
             System.out.println(items);
+            System.out.println("Стоимость корзины равна:" + totalPrice);
         }
     }
 }
