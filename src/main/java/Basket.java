@@ -1,8 +1,16 @@
 public class Basket {
     private String items = "";
 
-    private int limit = 20000;
+    private int limit = 10000;
     private int totalPrice = 0;
+
+    public Basket(int limit) {
+        this.limit = limit;
+    }
+
+    public Basket (){
+
+    }
 
     public boolean contains (String name) {
         return items.contains(name);
@@ -12,7 +20,7 @@ public class Basket {
         if (contains(name)){
             return;
         }
-        if (totalPrice + price >= limit) {
+        if (totalPrice + price > limit) {
             return;
         }
         if (items.isEmpty()) {
